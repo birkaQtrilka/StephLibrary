@@ -1,0 +1,7 @@
+{
+	"name": "steph.Editor",
+	"rootNamespace": "steph.Unity.Editor",
+	"references": ["GUID:...or name...MyLibrary.Runtime"],
+	"includePlatforms": ["Editor"],
+	"excludePlatforms": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "steph.Unity.WFC.Editor",
+  "rootNamespace": "steph.Unity.WFC.Editor",
+  "references": [
+    "steph.Unity.WFC.Runtime"
+  ],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": []
+}

@@ -1,6 +1,6 @@
 {
-	"name": "steph.Runtime",
-	"rootNamespace": "steph.Unity.Runtime",
+	"name": "steph.Unity.WFC.Runtime",
+	"rootNamespace": "steph.Unity.WFC.Runtime",
   	"references": [],
   	"includePlatforms": [],
   	"excludePlatforms": [],

@@ -1,0 +1,10 @@
+{
+    "name": "com.steph.unity.wfc",
+    "version": "0.0.0",
+    "displayName": "Stefan's WFC World Creator",
+    "description": "A world editor that is using WFC under the hood",
+    "unity": "6000",
+    "author": {
+        "name": "Stefan Carpeliuc"
+    }
+}

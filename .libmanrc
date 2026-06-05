@@ -1,0 +1,10 @@
+{
+    "author_name": "Stefan Carpeliuc",
+    "author_email": "stefancarpeliuc@gmail.com",
+    "package_prefix": "com.steph",
+    "assembly_prefix": "steph",
+    "unity_version": "6000",
+    "unity_folder": "Unity",
+    "remote": "origin",
+    "branch": "main"
+}

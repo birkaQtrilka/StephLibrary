@@ -1,0 +1,18 @@
+{
+    "name": "steph.Unity.Spider.Editor",
+    "rootNamespace": "steph.Unity.Spider.Editor",
+    "references": [
+        "steph.Unity.Spider.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

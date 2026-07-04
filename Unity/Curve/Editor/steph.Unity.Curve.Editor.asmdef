@@ -1,0 +1,18 @@
+{
+    "name": "steph.Unity.Curve.Editor",
+    "rootNamespace": "steph.Unity.Curve.Editor",
+    "references": [
+        "steph.Unity.Curve.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

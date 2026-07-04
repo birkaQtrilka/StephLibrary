@@ -1,0 +1,11 @@
+{
+    "name": "com.steph.unity.curve",
+    "version": "0.0.0",
+    "displayName": "Stefan's Curve",
+    "description": "The Curve package.",
+    "unity": "6000",
+    "author": {
+        "name": "Stefan Carpeliuc",
+        "email": "stefancarpeliuc@gmail.com"
+    }
+}

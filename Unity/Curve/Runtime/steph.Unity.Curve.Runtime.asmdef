@@ -1,0 +1,14 @@
+{
+    "name": "steph.Unity.Curve.Runtime",
+    "rootNamespace": "steph.Unity.Curve.Runtime",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,14 @@
+{
+    "name": "steph.Unity.Spider.Runtime",
+    "rootNamespace": "steph.Unity.Spider.Runtime",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

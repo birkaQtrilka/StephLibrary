@@ -1,7 +1,9 @@
 {
     "name": "steph.Unity.Spider.Runtime",
     "rootNamespace": "steph.Unity.Spider.Runtime",
-    "references": [],
+    "references": [
+        "GUID:36930395b32c2344c83ce25d2f320f78"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

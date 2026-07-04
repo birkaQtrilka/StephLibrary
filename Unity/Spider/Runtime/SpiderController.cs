@@ -1,11 +1,10 @@
-namespace steph.Spider {
-using FMODUnity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-[SelectionBase]
+namespace steph.Unity.Spider.Runtime {
+    using System;
+    using steph.Unity.Curve.Runtime;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    [SelectionBase]
 public class SpiderController : MonoBehaviour
 {
     public bool IsMoving { get; private set; }
@@ -82,9 +81,6 @@ public class SpiderController : MonoBehaviour
 
     //for debug
     Vector3 _closestContactPoint;
-
-    //for FMOD
-    [SerializeField] EventReference sound;
 
     void Start()
     {
@@ -279,10 +275,6 @@ public class SpiderController : MonoBehaviour
         UnityEngine.Gizmos.DrawSphere(_closestContactPoint, .2f * transform.lossyScale.y);
     }
 
-    private void OnEnable()
-    {
-        AudioManager.instance.PlayOneShot(sound, transform.position);
-    }
 
     void OnDisable()
     {

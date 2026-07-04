@@ -1,4 +1,4 @@
-namespace steph.Spider {
+namespace steph.Unity.Spider.Runtime {
 ﻿using UnityEngine;
 
 public class Member

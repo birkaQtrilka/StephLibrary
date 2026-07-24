@@ -1,7 +1,6 @@
 using System;
 namespace steph.Unity.WFC.Runtime
 {
-  // testing update 
     [Serializable]
     public class GridCellRow
     {

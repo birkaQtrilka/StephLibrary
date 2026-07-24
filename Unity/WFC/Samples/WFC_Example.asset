@@ -1,0 +1,465 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb25ad33abbcf844b9a117d92657b0fa, type: 3}
+  m_Name: WFC_Example
+  m_EditorClassIdentifier: steph.Unity.WFC.Runtime::steph.Unity.WFC.Runtime.WorldGenConfig
+  Columns: 4
+  SocketsCount: 3
+  AvailableTiles: []
+  Grid:
+    _cellRows:
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+          <Prefab>k__BackingField: {fileID: 0}
+          <Rotation>k__BackingField: 0
+          Manual: 0
+          SpawnChance: 0
+        CellData:
+          rid: -2
+  SocketColors: []
+  _seed: 100
+  _framed: 0
+  _framingTileIndex: 0
+  _prePlacedCells: []
+  Done: 0
+  _apply: 0
+  drawGrid: 0
+  drawSockets: 0
+  allowHollowTiles: 0
+  drawNames: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

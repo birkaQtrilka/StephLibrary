@@ -9,15 +9,13 @@ namespace steph.Unity.WFC.Runtime
     {
         const int ROTATIONS = 4;
 
-        public int Columns = 4;
-        public int SocketsCount = 3;
-        public List<Tile> AvailableTiles = new();
+        [Range(0, 50)] public int Columns = 4;
+        [Range(0,10)] public int SocketsCount = 3;
+        public AvailableTiles AvailableTiles; // all tiles need to have a unique name
         public GridCellCollection Grid = new(5);
         public ColorForSocket[] SocketColors;
 
         [SerializeField] int _seed = 100;
-        [SerializeField] bool _framed;
-        [SerializeField] int _framingTileIndex;
 
         [SerializeField] List<CellAndDir> _neighbours = new();
         [SerializeField] List<GridCell> _prePlacedCells = new();
@@ -48,14 +46,11 @@ namespace steph.Unity.WFC.Runtime
         {
             Done = false;
             _random = new System.Random(seed);
-            var proceduralTiles = AvailableTiles.Where(t => !t.Manual);
+            var proceduralTiles = AvailableTiles.GetTiles().Where(t => t.TileData is not BaseTileData data || !data.Manual);
             var rotatedTiles = proceduralTiles.Concat(GenerateRotatedTileStates(proceduralTiles)).ToArray();
             _prePlacedCells.Clear();
-            //any pre placed tiles should be here for optimization
 
             PopulateGrid(rotatedTiles);
-
-            FillGridEdgesWithEmptyTiles();
 
             foreach (GridCell cell in _prePlacedCells)
             {
@@ -68,20 +63,20 @@ namespace steph.Unity.WFC.Runtime
             }
         }
 
-        void FillGridEdgesWithEmptyTiles()
-        {
-            Tile emptyTile = AvailableTiles[_framingTileIndex];
+        //void FillGridEdgesWithEmptyTiles()
+        //{
+        //    Tile emptyTile = AvailableTiles.GetTiles()[_framingTileIndex];
 
-            for (int y = 0; y < Columns; y++)
-                CollapseCell(Grid[y, 0], emptyTile);
-            for (int y = 0; y < Columns; y++)
-                CollapseCell(Grid[y, Columns - 1], emptyTile);
+        //    for (int y = 0; y < Columns; y++)
+        //        CollapseCell(Grid[y, 0], emptyTile);
+        //    for (int y = 0; y < Columns; y++)
+        //        CollapseCell(Grid[y, Columns - 1], emptyTile);
 
-            for (int x = 1; x < Columns - 1; x++)
-                CollapseCell(Grid[0, x], emptyTile);
-            for (int x = 1; x < Columns - 1; x++)
-                CollapseCell(Grid[Columns - 1, x], emptyTile);
-        }
+        //    for (int x = 1; x < Columns - 1; x++)
+        //        CollapseCell(Grid[0, x], emptyTile);
+        //    for (int x = 1; x < Columns - 1; x++)
+        //        CollapseCell(Grid[Columns - 1, x], emptyTile);
+        //}
 
         List<Tile> GenerateRotatedTileStates(IEnumerable<Tile> unrotatedTiles)
         {
@@ -159,7 +154,7 @@ namespace steph.Unity.WFC.Runtime
 
             float totalChance = 0;
             foreach (Tile possibility in cell.Possibilities)
-                totalChance += possibility.SpawnChance;
+                totalChance += possibility.TileData is BaseTileData data ? data.Probability : 0;
 
             float rand = (float)_random.NextDouble() * totalChance;
             float cummulativeChance = 0;
@@ -167,7 +162,7 @@ namespace steph.Unity.WFC.Runtime
 
             foreach (Tile possibility in cell.Possibilities)
             {
-                cummulativeChance += possibility.SpawnChance;
+                cummulativeChance += possibility.TileData is BaseTileData data ? data.Probability : 0;
                 if (rand <= cummulativeChance)
                     return index;
                 index++;
@@ -271,9 +266,9 @@ namespace steph.Unity.WFC.Runtime
             Debug.Assert(tile != null, "you should always find the prefab, check if the prefab is null");
 
             if (tile == null) return -1;
-            for (int i = 0; i < AvailableTiles.Count; i++)
+            for (int i = 0; i < AvailableTiles.GetTiles().Count; i++)
             {
-                if (tile.Prefab == AvailableTiles[i].Prefab)
+                if (tile.Name == AvailableTiles.GetTiles()[i].Name)
                     return i + 1;
             }
             return -1;

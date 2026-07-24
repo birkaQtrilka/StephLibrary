@@ -12,9 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb25ad33abbcf844b9a117d92657b0fa, type: 3}
   m_Name: WFC_Example
   m_EditorClassIdentifier: steph.Unity.WFC.Runtime::steph.Unity.WFC.Runtime.WorldGenConfig
-  Columns: 4
+  Columns: 10
   SocketsCount: 3
-  AvailableTiles: []
+  AvailableTiles:
+    _tiles:
+    - <Name>k__BackingField: Blank
+      _sockets:
+        _edges:
+        - aba
+        - aba
+        - aba
+        - waa
+        socketLength: 3
+      <Rotation>k__BackingField: 0
+      TileData:
+        rid: 6805578404911906885
+    - <Name>k__BackingField: Line
+      _sockets:
+        _edges:
+        - aba
+        - aaa
+        - aba
+        - aaa
+        socketLength: 3
+      <Rotation>k__BackingField: 0
+      TileData:
+        rid: 6805578404911906887
+    - <Name>k__BackingField: Corner
+      _sockets:
+        _edges:
+        - aaa
+        - aba
+        - aba
+        - aaa
+        socketLength: 3
+      <Rotation>k__BackingField: 0
+      TileData:
+        rid: 6805578404911906888
+    - <Name>k__BackingField: Cross
+      _sockets:
+        _edges:
+        - aba
+        - aba
+        - aba
+        - aba
+        socketLength: 3
+      <Rotation>k__BackingField: 0
+      TileData:
+        rid: 6805578404911906892
+    _socketLength: 3
   Grid:
     _cellRows:
     - Cells:
@@ -23,16 +69,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -40,16 +87,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -57,16 +105,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -74,16 +123,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -91,16 +141,107 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
     - Cells:
@@ -109,16 +250,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -126,16 +268,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -143,16 +286,35 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 1
+        Possibilities: []
+        X: 3
+        Y: 1
+        tile:
+          <Name>k__BackingField: Blank
+          _sockets:
+            _edges:
+            - aba
+            - aba
+            - aba
+            - waa
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: 6805578404911906885
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -160,16 +322,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -177,16 +340,89 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
     - Cells:
@@ -195,16 +431,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -212,16 +449,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -229,16 +467,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -246,16 +485,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -263,16 +503,107 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
     - Cells:
@@ -281,16 +612,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -298,16 +630,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -315,16 +648,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -332,16 +666,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -349,16 +684,107 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
     - Cells:
@@ -367,16 +793,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -384,16 +811,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -401,16 +829,35 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 2
+        Possibilities: []
+        X: 3
+        Y: 4
+        tile:
+          <Name>k__BackingField: Line
+          _sockets:
+            _edges:
+            - aba
+            - aaa
+            - aba
+            - aaa
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: 6805578404911906887
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -418,16 +865,17 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
       - PopUpIndex: 0
@@ -435,31 +883,1037 @@ MonoBehaviour:
         X: 0
         Y: 0
         tile:
+          <Name>k__BackingField: 
           _sockets:
             _edges:
             - 
             - 
             - 
             - 
-          <Prefab>k__BackingField: {fileID: 0}
+            socketLength: 3
           <Rotation>k__BackingField: 0
-          Manual: 0
-          SpawnChance: 0
+          TileData:
+            rid: -2
         CellData:
           rid: -2
-  SocketColors: []
-  _seed: 100
-  _framed: 0
-  _framingTileIndex: 0
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+    - Cells:
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+      - PopUpIndex: 0
+        Possibilities: []
+        X: 0
+        Y: 0
+        tile:
+          <Name>k__BackingField: 
+          _sockets:
+            _edges:
+            - 
+            - 
+            - 
+            - 
+            socketLength: 3
+          <Rotation>k__BackingField: 0
+          TileData:
+            rid: -2
+        CellData:
+          rid: -2
+  SocketColors:
+  - socket: 97
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - socket: 98
+    color: {r: 0.5450981, g: 0, b: 0, a: 1}
+  - socket: 119
+    color: {r: 0.3333333, g: 0.4196079, b: 0.1843137, a: 1}
+  _seed: 20
   _prePlacedCells: []
   Done: 0
   _apply: 0
-  drawGrid: 0
-  drawSockets: 0
+  drawGrid: 1
+  drawSockets: 1
   allowHollowTiles: 0
-  drawNames: 0
+  drawNames: 1
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 6805578404911906885
+      type: {class: BaseTileData, ns: steph.Unity.WFC.Runtime, asm: steph.Unity.WFC.Runtime}
+      data:
+        Manual: 0
+        Probability: 1
+        Prefab: {fileID: 0}
+    - rid: 6805578404911906887
+      type: {class: BaseTileData, ns: steph.Unity.WFC.Runtime, asm: steph.Unity.WFC.Runtime}
+      data:
+        Manual: 0
+        Probability: 0.227
+        Prefab: {fileID: 0}
+    - rid: 6805578404911906888
+      type: {class: BaseTileData, ns: steph.Unity.WFC.Runtime, asm: steph.Unity.WFC.Runtime}
+      data:
+        Manual: 0
+        Probability: 0.411
+        Prefab: {fileID: 0}
+    - rid: 6805578404911906892
+      type: {class: BaseTileData, ns: steph.Unity.WFC.Runtime, asm: steph.Unity.WFC.Runtime}
+      data:
+        Manual: 0
+        Probability: 0.051
+        Prefab: {fileID: 0}

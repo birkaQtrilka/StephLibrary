@@ -2,11 +2,12 @@
 
 namespace steph.Unity.WFC.Editor
 {
+    using Codice.CM.Common;
+    using steph.Unity.Editor;
+    using steph.Unity.WFC.Runtime;
     using System.Linq;
     using UnityEditor;
     using UnityEngine;
-    using steph.Unity.Editor;
-    using steph.Unity.WFC.Runtime;
 
     [CustomEditor(typeof(WorldGenConfig))]
     public class WorldGenConfigDrawer : Editor
@@ -16,25 +17,39 @@ namespace steph.Unity.WFC.Editor
         string[] _tileNames;
         int _oldTileNamesCount;
 
-        SerializedProperty _selectedCellData;
-
         void OnEnable()
         {
             SO = (WorldGenConfig)target;
             UpdateTileNames();
             _oldTileNamesCount = _tileNames.Length;
+            if(SO.AvailableTiles == null)
+            {
+                SO.AvailableTiles = new AvailableTiles(SO);
+                SaveObject();
+            }
         }
 
         public override void OnInspectorGUI()
         {
             SO = (WorldGenConfig)target;
+
+            serializedObject.Update();
+
             EditorGUI.BeginChangeCheck();
-            DrawGridColumnsField();
-            EditorGUI.EndChangeCheck();
+            DrawField("Columns");
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
 
             EditorGUI.BeginChangeCheck();
             SerializedProperty apply = serializedObject.FindProperty("_apply");
             EditorGUILayout.PropertyField(apply);
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
+
             if (apply.boolValue)
             {
                 apply.boolValue = false;
@@ -45,25 +60,27 @@ namespace steph.Unity.WFC.Editor
                     if (SO == null) return;
 
                     Undo.RecordObject(SO, "Resetting grid");
-
                     SO.Grid = new GridCellCollection(SO.Columns);
-
                     SaveObject();
                 };
                 return;
             }
 
-            if (SO.Grid == null || SO.Grid.GetHorizontalLength() != SO.Columns)
-            {
-                return;
-            }
-
             EditorGUI.BeginChangeCheck();
-            SerializedProperty availableTilesProp = DrawAvailableTiles();
+            DrawField("SocketsCount");
             if (EditorGUI.EndChangeCheck())
             {
-                Debug.Log("changed tiles");
-                LimitSocketLength(availableTilesProp);
+                SO.AvailableTiles = new AvailableTiles(SO);
+                serializedObject.ApplyModifiedProperties();
+            }
+
+            bool isGridValid = SO.Grid != null && SO.Grid.GetHorizontalLength() == SO.Columns;
+
+            EditorGUI.BeginChangeCheck();
+            SerializedProperty availableTilesProp = DrawField("AvailableTiles", true);
+            if (EditorGUI.EndChangeCheck())
+            {
+
                 serializedObject.ApplyModifiedProperties();
 
                 UpdateTileNames();
@@ -71,6 +88,7 @@ namespace steph.Unity.WFC.Editor
                 if (_oldTileNamesCount != newCount)
                 {
                     _oldTileNamesCount = newCount;
+                    // Apply properties right before wiping out the map
                     serializedObject.ApplyModifiedProperties();
                     SO.DestroyMap();
                     SaveObject();
@@ -78,28 +96,22 @@ namespace steph.Unity.WFC.Editor
                 return;
             }
 
-            DrawSeedField();
-            DrawSocketCountField();
+            DrawField("_seed");
 
-            if (_selectedCellData != null)
-            {
-                EdtrUtil.DrawPolymorphicField<CellData>(_selectedCellData);
-            }
-
+            // Since we didn't return early, your buttons will remain visible even if the grid is null!
             if (GUILayout.Button("GenerateGridRandom"))
             {
                 Undo.RecordObject(SO, "generated grid");
                 SO.GenerateGrid(UnityEngine.Random.Range(0, 1000));
                 SaveObject();
-
                 return;
             }
+
             if (GUILayout.Button("GenerateGrid"))
             {
                 Undo.RecordObject(SO, "generated grid");
                 SO.GenerateGrid();
                 SaveObject();
-
                 return;
             }
 
@@ -108,33 +120,39 @@ namespace steph.Unity.WFC.Editor
                 Undo.RecordObject(SO, "Destroyed grid");
                 SO.DestroyMap();
                 SaveObject();
-
                 return;
             }
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("drawGrid"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("drawSockets"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("drawNames"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("allowHollowTiles"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("SocketColors"));
 
-            if (SO.drawGrid)
-                DrawGrid();
+            DrawField("drawGrid");
+            DrawField("drawSockets");
+            DrawField("drawNames");
+            DrawField("allowHollowTiles");
+            DrawField("SocketColors", true);
 
-            if (EditorGUI.EndChangeCheck())
+            if (isGridValid)
             {
-                serializedObject.ApplyModifiedProperties();
+                if (SO.drawGrid)
+                {
+                    DrawGrid();
+                }
             }
+            else
+            {
+                EditorGUILayout.HelpBox("Grid is empty or mismatched. Please check 'Apply' or click 'Generate Grid'.", MessageType.Info);
+            }
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         void UpdateTileNames()
         {
-            _tileNames = SO.AvailableTiles.Where(t => t.Prefab != null).Select(t => t.Prefab.name).Prepend("None").ToArray();
+            _tileNames = SO.AvailableTiles.GetTiles().Where(t => t.Name != null).Select(t => t.Name).Prepend("None").ToArray();
 
         }
 
         void SaveObject()
         {
-            Debug.Log("Saving");
+            //Debug.Log("Saving");
             EditorUtility.SetDirty(target);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -170,6 +188,8 @@ namespace steph.Unity.WFC.Editor
                     if (SO.drawSockets)
                         DrawSocketsRects(GUILayoutUtility.GetLastRect(), SO.Grid[y, x].tile.Sockets);
 
+                    Rect buttonRect = GUILayoutUtility.GetLastRect();
+
                     if (!buttonIsPressed) continue;
 
                     if (IsMiddleClick())
@@ -185,9 +205,14 @@ namespace steph.Unity.WFC.Editor
                         SaveObject();
                         return;
                     }
-                    DrawMenu(x, y, _tileNames);
                     var selection = GetCellProperty(x, y);
-                    _selectedCellData = selection.FindPropertyRelative("CellData");
+
+                    PopupWindow.Show(buttonRect, new TileSelectionPopup(
+                        _tileNames,
+                        selection.FindPropertyRelative("CellData"),
+                        SO.Grid[y, x].tile,
+                        (selectedIndex) => ApplyTileSelection(selectedIndex, x, y)
+                    ));
                 }
                 GUILayout.EndHorizontal();
             }
@@ -229,46 +254,30 @@ namespace steph.Unity.WFC.Editor
             return SO.SocketColors.FirstOrDefault(sc => sc.socket == socket).color;
         }
 
-        void DrawMenu(int x, int y, string[] tileNames)
-        {
-            GenericMenu menu = new();
-            for (int i = 0; i < tileNames.Length; i++) AddMenuItem(menu, tileNames[i], i, x, y);
-            menu.ShowAsContext();
-        }
-
-        // a method to simplify adding menu items
-        void AddMenuItem(GenericMenu menu, string menuPath, int popUpIndex, int x, int y)
-        {
-            // the menu item is marked as selected if it matches the current popUpIndex
-            menu.AddItem(new GUIContent(menuPath), SO.Grid[y, x].PopUpIndex == popUpIndex, OnMenuButtonPress, new MenuData(x, y, popUpIndex));
-        }
-
-        void OnMenuButtonPress(object menuDataObj)
+        void ApplyTileSelection(int popUpIndex, int x, int y)
         {
             Undo.RecordObject(SO, "AddedItem");
 
-            MenuData data = (MenuData)menuDataObj;
             GridCell newCell = new()
             {
-                PopUpIndex = data.PopUpIndex,
-                tile = data.PopUpIndex == 0 ? null : SO.AvailableTiles[data.PopUpIndex - 1].Clone(),
-                X = data.X,
-                Y = data.Y,
+                PopUpIndex = popUpIndex,
+                tile = popUpIndex == 0 ? null : SO.AvailableTiles.GetTiles()[popUpIndex - 1].Clone(),
+                X = x,
+                Y = y,
             };
-            SO.Grid[data.Y, data.X] = newCell;
+            SO.Grid[y, x] = newCell;
             SaveObject();
-
         }
 
         void ColorTiles(int x, int y)
         {
             Tile tile = SO.Grid[y, x].tile;
             //showing if selected tiles have valid connections
-            if (!IsEmpty(tile))
+            if (!tile.HasEmptySockets())
             {
                 if (!AllValidConnections(x, y, tile, SO.Grid))
                     GUI.backgroundColor = Color.red;
-                else if (tile.Manual)
+                else if (tile.TileData is BaseTileData data && data.Manual)
                     GUI.backgroundColor = Color.blue;
                 else
                     GUI.backgroundColor = Color.green;
@@ -276,37 +285,11 @@ namespace steph.Unity.WFC.Editor
             else
                 GUI.backgroundColor = new Color(0.76f, 0.76f, 0.76f); ;//default color
         }
-
-        void DrawSeedField()
+        SerializedProperty DrawField(string propertyName, bool includeChildren = false)
         {
-            SerializedProperty seedProp = serializedObject.FindProperty("_seed");
-            seedProp.intValue = Mathf.Clamp(seedProp.intValue, 1, 20);
-            EditorGUILayout.PropertyField(seedProp);
-
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_framed"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_framingTileIndex"));
-
-        }
-
-        void DrawGridColumnsField()
-        {
-            SerializedProperty columnsProp = serializedObject.FindProperty("Columns");
-            columnsProp.intValue = Mathf.Clamp(columnsProp.intValue, 1, 50);
-            EditorGUILayout.PropertyField(columnsProp);
-        }
-
-        void DrawSocketCountField()
-        {
-            SerializedProperty socketCountProp = serializedObject.FindProperty("SocketsCount");
-            socketCountProp.intValue = Mathf.Clamp(socketCountProp.intValue, 1, 5);
-            EditorGUILayout.PropertyField(socketCountProp);
-        }
-
-        SerializedProperty DrawAvailableTiles()
-        {
-            SerializedProperty availableTiles = serializedObject.FindProperty("AvailableTiles");
-            EditorGUILayout.PropertyField(availableTiles, true);
-            return availableTiles;
+            SerializedProperty prop = serializedObject.FindProperty(propertyName);
+            EditorGUILayout.PropertyField(prop, includeChildren);
+            return prop;
         }
 
         bool IsRightClick()
@@ -323,7 +306,7 @@ namespace steph.Unity.WFC.Editor
         {
             bool IsNotConnected(Tile otherTile, NeighbourDir dir)
             {
-                return !IsEmpty(otherTile) && !currentTile.CanConnect(otherTile, dir);
+                return !otherTile.HasEmptySockets() && !currentTile.CanConnect(otherTile, dir);
             }
 
             //check if I'm bounds and then if  the tile is not connected
@@ -342,52 +325,5 @@ namespace steph.Unity.WFC.Editor
             return true;
         }
 
-        bool IsEmpty(Tile tile)
-        {
-            return tile.Prefab == null;
-        }
-
-        /// <summary>
-        /// Sets the string from the inspector to be length of allowed socket length (if string is bigger than allowed)
-        /// </summary>
-        /// <param name="tilesListProperty"></param>
-        void LimitSocketLength(SerializedProperty tilesListProperty)
-        {
-            for (int i = 0; i < tilesListProperty.arraySize; i++)
-            {
-                SerializedProperty edges = tilesListProperty
-                    .GetArrayElementAtIndex(i)
-                    .FindPropertyRelative("_sockets")
-                    .FindPropertyRelative("_edges");
-                for (int j = 0; j < edges.arraySize; j++)
-                {
-                    SerializedProperty edge = edges.GetArrayElementAtIndex(j);
-                    edge.stringValue = LimitLength(SO.SocketsCount, edge.stringValue);
-                }
-            }
-        }
-
-        string LimitLength(int length, string text)
-        {
-            if (text.Length > length)
-                return text[..length];
-            return text;
-        }
-
-        class MenuData
-        {
-            //public readonly SerializedProperty GridCellProp;
-            public readonly int X;
-            public readonly int Y;
-            public readonly int PopUpIndex;
-
-            public MenuData(/*SerializedProperty cellProp,*/int x, int y, int popUpIndex)
-            {
-                X = x;
-                Y = y;
-                //GridCellProp = cellProp;
-                PopUpIndex = popUpIndex;
-            }
-        }
     }
 }

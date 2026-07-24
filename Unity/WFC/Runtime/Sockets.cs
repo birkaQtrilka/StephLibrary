@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 namespace steph.Unity.WFC.Runtime
 {
     [Serializable]
@@ -10,6 +11,21 @@ namespace steph.Unity.WFC.Runtime
     {
         //up right down left
         [SerializeField] string[] _edges = new string[4];
+
+        public int socketLength = 3;
+
+        private Sockets() { }
+
+        public Sockets(int socketLength)
+        {
+            this.socketLength = socketLength;
+            _edges = new string[4];
+            for (int i = 0; i < _edges.Length; i++)
+            {
+                _edges[i] = new string('a', socketLength);
+            }
+        }
+
         public string[] GetArray()
         {
             return _edges;

@@ -30,7 +30,7 @@ namespace steph.Unity.WFC.Runtime
 
         public bool IsEmpty()
         {
-            return tile.Prefab == null;
+            return tile.HasEmptySockets();
         }
     }
 }

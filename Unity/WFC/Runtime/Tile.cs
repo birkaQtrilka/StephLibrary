@@ -1,26 +1,32 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 namespace steph.Unity.WFC.Runtime
 {
     [Serializable]
     public class Tile
     {
+        [field: SerializeField] public string Name { get; private set; }
         //sockets are the edges of tiles divided into 3 parts. These three parts are then checked with other tiles to see if they can be connected
         //A is empty
         //B is road
         [SerializeField] Sockets _sockets;
         public Sockets Sockets => _sockets;
-        [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: SerializeField, HideInInspector] public float Rotation { get; private set; }
-        public bool Manual;
-        [Range(0, 1)] public float SpawnChance;
-
         public List<Tile> Neighbours { get; } = new List<Tile>(4);
+
+
+        [Polymorphic, SerializeReference] public TileData TileData;
 
         public override string ToString()
         {
-            return $"sockets: {_sockets}, rotation: {Rotation}, prefab: {Prefab}";
+            return $"NAME: {Name}:: sockets: {_sockets}, rotation: {Rotation}, TileData: {DebugFormat.Debug(TileData)}";
+        }
+
+        public Tile(Sockets sockets)
+        {
+            _sockets = sockets;
         }
 
         public Tile()
@@ -28,13 +34,12 @@ namespace steph.Unity.WFC.Runtime
 
         }
 
-        private Tile(GameObject prefab, float rotation, Sockets sockets, float spawnChance, bool manual)
+        private Tile(string name, float rotation, Sockets sockets, TileData data)
         {
             Rotation = rotation;
             _sockets = sockets;
-            Prefab = prefab;
-            SpawnChance = spawnChance;
-            Manual = manual;
+            Name = name;
+            TileData = data;
         }
 
         public void Rotate()
@@ -45,7 +50,7 @@ namespace steph.Unity.WFC.Runtime
 
         public Tile Clone()
         {
-            Tile nt = new(Prefab, Rotation, _sockets.Clone(), SpawnChance, Manual);
+            Tile nt = new(Name.Clone() as string, Rotation, _sockets.Clone(), TileData);
             return nt;
         }
 
@@ -94,6 +99,11 @@ namespace steph.Unity.WFC.Runtime
                 newTile.Rotate();
 
             results.Add(newTile);
+        }
+
+        public bool HasEmptySockets()
+        {
+            return Sockets.Any(s => string.IsNullOrEmpty(s));
         }
     }
 }

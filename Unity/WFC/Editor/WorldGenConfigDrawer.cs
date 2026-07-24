@@ -2,9 +2,8 @@
 
 namespace steph.Unity.WFC.Editor
 {
-    using Codice.CM.Common;
-    using steph.Unity.Editor;
     using steph.Unity.WFC.Runtime;
+    using System.Collections.Generic;
     using System.Linq;
     using UnityEditor;
     using UnityEngine;
@@ -128,6 +127,8 @@ namespace steph.Unity.WFC.Editor
             DrawField("drawNames");
             DrawField("allowHollowTiles");
             DrawField("SocketColors", true);
+            DrawField("_behaviors", true);
+            DrawBehaviors();
 
             if (isGridValid)
             {
@@ -156,6 +157,46 @@ namespace steph.Unity.WFC.Editor
             EditorUtility.SetDirty(target);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+
+        void DrawBehaviors()
+        {
+            SerializedProperty prop = serializedObject.FindProperty("_behaviors");
+            EditorGUILayout.PropertyField(prop, true);
+
+            // Show inspectors for each element
+            if (!prop.isExpanded) return;
+            for (int i = 0; i < prop.arraySize; i++)
+            {
+                var element = prop.GetArrayElementAtIndex(i);
+
+                if (element.objectReferenceValue == null)
+                    continue;
+
+                EditorGUILayout.Space();
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+                EditorGUILayout.LabelField(
+                    element.objectReferenceValue.name,
+                    EditorStyles.boldLabel);
+
+                GetEditor(element.objectReferenceValue).OnInspectorGUI();
+
+                EditorGUILayout.EndVertical();
+            }
+        }
+
+        private readonly Dictionary<Object, Editor> _editors = new();
+
+        Editor GetEditor(Object obj)
+        {
+            if (!_editors.TryGetValue(obj, out var editor))
+            {
+                Editor.CreateCachedEditor(obj, null, ref editor);
+                _editors[obj] = editor;
+            }
+
+            return editor;
         }
 
         void DrawGrid()

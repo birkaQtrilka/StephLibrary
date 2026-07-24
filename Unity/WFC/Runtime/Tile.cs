@@ -92,13 +92,13 @@ namespace steph.Unity.WFC.Runtime
             };
         }
 
-        public void GenerateRotatedVersions(List<Tile> results, int rotations)
+        public Tile GenerateRotatedVersion(int rotations)
         {
             Tile newTile = Clone();
             for (int i = 0; i < rotations; i++)
                 newTile.Rotate();
 
-            results.Add(newTile);
+            return newTile;
         }
 
         public bool HasEmptySockets()

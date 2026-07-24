@@ -7,7 +7,7 @@ using UnityEngine;
 namespace steph.Unity.WFC.Runtime
 {
     [Serializable]
-    public class Sockets : IEnumerable<string>
+    public class Sockets : IEnumerable<string>, IEquatable<Sockets>
     {
         //up right down left
         [SerializeField] string[] _edges = new string[4];
@@ -75,6 +75,18 @@ namespace steph.Unity.WFC.Runtime
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new SocketEnumerator(_edges);
+        }
+
+        public bool Equals(Sockets other)
+        {
+            if (other == null) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            for (int i = 0; i < _edges.Length; i++)
+            {
+                if (_edges[i] != other._edges[i]) return false;
+            }
+            return true;
         }
     }
 }

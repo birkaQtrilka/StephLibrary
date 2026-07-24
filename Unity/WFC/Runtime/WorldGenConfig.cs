@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace steph.Unity.WFC.Runtime
 {
-    [CreateAssetMenu(menuName = "Stefan/WorldData", fileName = "new WorldGenConfig")]
+    [CreateAssetMenu(menuName = "Stefan/WFC/WorldData", fileName = "new WorldGenConfig")]
     public class WorldGenConfig : ScriptableObject
     {
         const int ROTATIONS = 4;
 
         [Range(0, 50)] public int Columns = 4;
-        [Range(0,10)] public int SocketsCount = 3;
+        [Range(1,10)] public int SocketsCount = 3;
         public AvailableTiles AvailableTiles; // all tiles need to have a unique name
         public GridCellCollection Grid = new(5);
         public ColorForSocket[] SocketColors;
@@ -21,6 +21,7 @@ namespace steph.Unity.WFC.Runtime
         [SerializeField] List<GridCell> _prePlacedCells = new();
         [SerializeField, HideInInspector] bool Done;
         [SerializeField] bool _apply;
+        [SerializeField] WFC_Behavior[] _behaviors;
 
         System.Random _random;
 
@@ -51,6 +52,11 @@ namespace steph.Unity.WFC.Runtime
             _prePlacedCells.Clear();
 
             PopulateGrid(rotatedTiles);
+            foreach (WFC_Behavior behavior in _behaviors)
+            {
+                behavior.BeforePropagate(this);
+            }
+
 
             foreach (GridCell cell in _prePlacedCells)
             {
@@ -65,17 +71,7 @@ namespace steph.Unity.WFC.Runtime
 
         //void FillGridEdgesWithEmptyTiles()
         //{
-        //    Tile emptyTile = AvailableTiles.GetTiles()[_framingTileIndex];
-
-        //    for (int y = 0; y < Columns; y++)
-        //        CollapseCell(Grid[y, 0], emptyTile);
-        //    for (int y = 0; y < Columns; y++)
-        //        CollapseCell(Grid[y, Columns - 1], emptyTile);
-
-        //    for (int x = 1; x < Columns - 1; x++)
-        //        CollapseCell(Grid[0, x], emptyTile);
-        //    for (int x = 1; x < Columns - 1; x++)
-        //        CollapseCell(Grid[Columns - 1, x], emptyTile);
+        //    
         //}
 
         List<Tile> GenerateRotatedTileStates(IEnumerable<Tile> unrotatedTiles)
@@ -83,10 +79,17 @@ namespace steph.Unity.WFC.Runtime
             List<Tile> rotatedTiles = new();
 
             foreach (Tile tile in unrotatedTiles)
+            {
+                int added = 0;
                 for (int i = 1; i < ROTATIONS; i++)
                 {
-                    tile.GenerateRotatedVersions(rotatedTiles, i);
+                    Tile rotated = tile.GenerateRotatedVersion(i);
+                    // skip if the rotated version has the same sockets as any of the previously added rotated versions
+                    if (rotatedTiles.TakeLast(added).Any(t => t.Sockets.Equals(rotated.Sockets))) continue;
+                    added++;
+                    rotatedTiles.Add(rotated);
                 }
+            }
 
             return rotatedTiles;
         }
@@ -171,7 +174,7 @@ namespace steph.Unity.WFC.Runtime
             return 0;
         }
 
-        void CollapseCell(GridCell cell, Tile prototype)
+        public void CollapseCell(GridCell cell, Tile prototype)
         {
             cell.Possibilities.Clear();
             cell.tile = prototype.Clone();

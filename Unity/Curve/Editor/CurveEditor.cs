@@ -12,6 +12,8 @@ namespace steph.Unity.Curve.Editor
         private Curve curve;
         int _lastModifiedPointIndex = -1;
 
+        bool _prevLockTangents;
+
         private void OnEnable()
         {
             curve = (Curve)target;
@@ -45,9 +47,36 @@ namespace steph.Unity.Curve.Editor
             }
             dirty |= ShowAndMovePoints();
 
+            UpdateLockTangents();
+
             if (dirty)
             {
                 curve.OnChange?.Invoke(curve);
+            }
+        }
+
+        void UpdateLockTangents()
+        {
+            if (!_prevLockTangents && curve.LockTangents)
+            {
+                _prevLockTangents = true;
+
+                for (int i = 0; i < curve.points.Count; i++)
+                {
+                    Vector3 position = curve.points[i].position;
+                    Vector3 tangent = i == 0 ? position : Vector3.Lerp(curve.points[i - 1].position, position, 0.5f);
+
+                    CurvePoint newPoint = new()
+                    {
+                        position = position,
+                        bezierTangent = tangent
+                    };
+                    curve.points[i] = newPoint;
+                }
+            }
+            else if (!curve.LockTangents)
+            {
+                _prevLockTangents = false;
             }
         }
 
@@ -63,7 +92,7 @@ namespace steph.Unity.Curve.Editor
             {
                 Undo.RecordObject(curve, "Add Spline Point");
 
-                CurvePoint newPoint = new CurvePoint()
+                CurvePoint newPoint = new()
                 {
                     position = handleTransform.InverseTransformPoint(hit.point),
                     bezierTangent = Vector3.zero
@@ -96,23 +125,26 @@ namespace steph.Unity.Curve.Editor
                     position = direction,
                     bezierTangent = direction
                 });
-                return;
             }
-            else if (_lastModifiedPointIndex == curve.points.Count - 1)
+            else if(_lastModifiedPointIndex != 0)
             {
                 direction = curve.GetPoint(_lastModifiedPointIndex - 1, _lastModifiedPointIndex, 0.5f);
-            }
-            else
-            {
-                direction = curve.GetPoint(_lastModifiedPointIndex, _lastModifiedPointIndex + 1, 0.5f);
+                Vector3 tangent = Vector3.Lerp(curve.points[_lastModifiedPointIndex - 1].position, direction, 0.5f);
+                Vector3 tangent2 = Vector3.Lerp(curve.points[_lastModifiedPointIndex].position, direction, 0.5f);
+                curve.points.Insert(_lastModifiedPointIndex, new CurvePoint()
+                {
+                    position = direction,
+                    bezierTangent = tangent
+                });
+                curve.points[_lastModifiedPointIndex + 1] = new CurvePoint()
+                {
+                    position = curve.points[_lastModifiedPointIndex + 1].position,
+                    bezierTangent = tangent2
+                };
+
             }
 
-            _lastModifiedPointIndex++;
-            curve.points.Insert(_lastModifiedPointIndex, new CurvePoint()
-            {
-                position = direction,
-                bezierTangent = direction
-            });
+            
         }
 
         bool RemovePoint()
@@ -152,7 +184,7 @@ namespace steph.Unity.Curve.Editor
                 if (i > 0)
                 {
                     Vector3 currentTangent = handleTransform.TransformPoint(curve.points[i].bezierTangent);
-                    if(curve.ShowHandles)
+                    if(curve.ShowHandles && !curve.LockTangents)
                         dirty |= DoBezierHandles(handleTransform, currentPoint, previousPoint, i, ref currentTangent);
 
                     Handles.color = Color.white;
@@ -178,9 +210,8 @@ namespace steph.Unity.Curve.Editor
                     previousPoint = currentPoint;
                     continue;
                 }
-                
 
-                DoPointHandles(handleTransform, i, ref currentPoint);
+                dirty |= DoPointHandles(handleTransform, i, ref currentPoint);
                 previousPoint = currentPoint;
 
             }
@@ -207,15 +238,36 @@ namespace steph.Unity.Curve.Editor
             currentPoint = CustomHandle(currentPoint, .5f);
             if (!EditorGUI.EndChangeCheck()) return false;
             Undo.RecordObject(curve, "moved");
-            CurvePoint newPoint = new()
-            {
-                position = handleTransform.InverseTransformPoint(currentPoint),
-                bezierTangent = curve.points[i].bezierTangent
-            };
-            curve.points[i] = newPoint;
+            
+            curve.points[i] = NewPoint(handleTransform.InverseTransformPoint(currentPoint), curve.points[i].bezierTangent, i);
+            if(curve.LockTangents)
+                curve.points[i+1] = new CurvePoint() { position = curve.points[i+1].position, bezierTangent = Vector3.Lerp(curve.points[i].position, curve.points[i + 1].position, .5f) };
             EditorUtility.SetDirty(curve);
             _lastModifiedPointIndex = i;
             return true;
+        }
+
+
+        CurvePoint NewPoint(Vector3 position, Vector3 tangent, int i)
+        {
+            if(curve.LockTangents)
+            {
+                if (i != 0)
+                {
+                    tangent = Vector3.Lerp(curve.points[i-1].position, curve.points[i].position, .5f);
+                }
+                else
+                {
+                    tangent = position;
+                }
+            }
+            
+            
+            return new CurvePoint()
+            {
+                position = position,
+                bezierTangent = tangent
+            };
         }
 
         bool DoBezierHandles(Transform handleTransform, Vector3 currentPoint, Vector3 previousPoint, int i, ref Vector3 currentTangent)

@@ -19,6 +19,7 @@ namespace steph.Unity.Curve.Runtime
         public bool AddOnMouse;
 
         public bool ShowHandles = true;
+        public bool LockTangents = true;
 
         //Gs means global space / world space
         public Vector3 start => points[0].position;

@@ -10,6 +10,7 @@ namespace steph.Unity.Curve.Editor
     public class CurveEditor : Editor
     {
         private Curve curve;
+        int _lastModifiedPointIndex = -1;
 
         private void OnEnable()
         {
@@ -89,20 +90,21 @@ namespace steph.Unity.Curve.Editor
             if (curve.points.Count < 2)
             {
                 direction = (curve.points.Count + 1) * .5f * curve.transform.forward;
+                _lastModifiedPointIndex++;
+                curve.points.Add(new CurvePoint()
+                {
+                    position = direction,
+                    bezierTangent = direction
+                });
+                return;
             }
             else if (_lastModifiedPointIndex == curve.points.Count - 1)
             {
-                Vector3 neighbour = curve.points[_lastModifiedPointIndex - 1].position;
-                Vector3 lastModified = curve.points[_lastModifiedPointIndex].position;
-                direction = lastModified - neighbour;
-                //direction = direction.normalized;
-                direction += lastModified;
+                direction = curve.GetPoint(_lastModifiedPointIndex - 1, _lastModifiedPointIndex, 0.5f);
             }
             else
             {
-                Vector3 neighbour = curve.points[_lastModifiedPointIndex + 1].position;
-                direction = Vector3.Lerp(neighbour, curve.points[_lastModifiedPointIndex].position, .4f);
-
+                direction = curve.GetPoint(_lastModifiedPointIndex, _lastModifiedPointIndex + 1, 0.5f);
             }
 
             _lastModifiedPointIndex++;
@@ -133,7 +135,6 @@ namespace steph.Unity.Curve.Editor
             return dirty;
         }
 
-        int _lastModifiedPointIndex = -1;
         // Show points in scene view, and check if they're changed:
         bool ShowAndMovePoints()
         {
@@ -152,7 +153,7 @@ namespace steph.Unity.Curve.Editor
                 {
                     Vector3 currentTangent = handleTransform.TransformPoint(curve.points[i].bezierTangent);
                     if(curve.ShowHandles)
-                        dirty |= DoBezier(handleTransform, currentPoint, previousPoint, i, ref currentTangent);
+                        dirty |= DoBezierHandles(handleTransform, currentPoint, previousPoint, i, ref currentTangent);
 
                     Handles.color = Color.white;
                     Vector3 p1 = Vector3.Lerp(previousPoint, currentTangent, 0.6666667f);
@@ -170,48 +171,54 @@ namespace steph.Unity.Curve.Editor
                         Handles.ConeHandleCap(i, currentPoint - capSize * 0.5f * dir, Quaternion.LookRotation(dir), capSize, EventType.Repaint);
                 }
 
-                Handles.color = CurveDebugWindow.Settings.PointColor;
-                Handles.SphereHandleCap(
-                    0,
-                    currentPoint,
-                    Quaternion.identity,
-                    CurveDebugWindow.Settings.PointSize,
-                    EventType.Repaint
-                );
+                DrawPoint(currentPoint);
 
                 if (!curve.ShowHandles)
                 {
                     previousPoint = currentPoint;
                     continue;
                 }
-                EditorGUI.BeginChangeCheck();
-                currentPoint = CustomHandle(currentPoint, .5f);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Undo.RecordObject(curve, "moved");
-                    CurvePoint newPoint = new()
-                    {
-                        position = handleTransform.InverseTransformPoint(currentPoint),
-                        bezierTangent = curve.points[i].bezierTangent
-                    };
-                    curve.points[i] = newPoint;
-                    EditorUtility.SetDirty(curve);
-                    _lastModifiedPointIndex = i;
-                    dirty = true;
-                }
+                
 
-                if(i == 0) 
-                { 
-                    previousPoint = currentPoint;
-                    continue;
-                }
+                DoPointHandles(handleTransform, i, ref currentPoint);
                 previousPoint = currentPoint;
 
             }
             return dirty;
         }
-        // Draws the bezier handles for a given point and checks if they are moved.
-        bool DoBezier(Transform handleTransform, Vector3 currentPoint, Vector3 previousPoint, int i, ref Vector3 currentTangent)
+
+        void DrawPoint(Vector3 p)
+        {
+            Color color = Handles.color;
+            Handles.color = CurveDebugWindow.Settings.PointColor;
+            Handles.SphereHandleCap(
+                0,
+                p,
+                Quaternion.identity,
+                CurveDebugWindow.Settings.PointSize,
+                EventType.Repaint
+            );
+            Handles.color = color;
+        }
+
+        bool DoPointHandles(Transform handleTransform, int i, ref Vector3 currentPoint)
+        {
+            EditorGUI.BeginChangeCheck();
+            currentPoint = CustomHandle(currentPoint, .5f);
+            if (!EditorGUI.EndChangeCheck()) return false;
+            Undo.RecordObject(curve, "moved");
+            CurvePoint newPoint = new()
+            {
+                position = handleTransform.InverseTransformPoint(currentPoint),
+                bezierTangent = curve.points[i].bezierTangent
+            };
+            curve.points[i] = newPoint;
+            EditorUtility.SetDirty(curve);
+            _lastModifiedPointIndex = i;
+            return true;
+        }
+
+        bool DoBezierHandles(Transform handleTransform, Vector3 currentPoint, Vector3 previousPoint, int i, ref Vector3 currentTangent)
         {
             Handles.color = Color.yellow;
 

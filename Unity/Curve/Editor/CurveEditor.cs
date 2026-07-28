@@ -1,9 +1,11 @@
 
 namespace steph.Unity.Curve.Editor
 {
-    using UnityEngine;
-    using UnityEditor;
+    using Codice.Client.Common;
     using steph.Unity.Curve.Runtime;
+    using UnityEditor;
+    using UnityEngine;
+    using static UnityEditor.PlayerSettings;
 
     [CustomEditor(typeof(Curve))]
     public class CurveEditor : Editor
@@ -77,7 +79,7 @@ namespace steph.Unity.Curve.Editor
         void InsertPointOnLastModified()
         {
             Vector3 direction;
-
+            _lastModifiedPointIndex = Mathf.Clamp(_lastModifiedPointIndex, 0, curve.points.Count - 1);
             if (curve.points.Count < 2)
             {
                 direction = (curve.points.Count + 1) * .5f * curve.transform.forward;
@@ -132,30 +134,36 @@ namespace steph.Unity.Curve.Editor
             for (int i = 0; i < curve.points.Count; i++)
             {
                 Vector3 currentPoint = handleTransform.TransformPoint(curve.points[i]);
+                SceneView sceneView = SceneView.currentDrawingSceneView;
+                if (sceneView == null) continue;
+                
 
                 if (i > 0)
                 {
-                    SceneView sceneView = SceneView.currentDrawingSceneView;
-                    if (sceneView != null)
-                    {
-                        Camera cam = sceneView.camera;
-                        float distance = Vector3.Distance(cam.transform.position, currentPoint);
+                    Handles.color = Color.white;
+                    Handles.DrawLine(previousPoint, currentPoint);
+                    
+                    Camera cam = sceneView.camera;
+                    float distance = Vector3.Distance(cam.transform.position, currentPoint);
+                    float screenSizeFactor = 0.06f * CurveDebugWindow.Settings.ArrowSize;
+                    float capSize = distance * screenSizeFactor;
 
-                        // This multiplier controls how big the cone appears on screen
-                        float screenSizeFactor = 0.06f * curve.PointSize; // Adjust this as needed
-                        float capSize = distance * screenSizeFactor;
-
-                        Handles.color = Color.white;
-                        Handles.DrawLine(previousPoint, currentPoint);
-
-                        Handles.color = Color.blue;
-                        Vector3 dir = (currentPoint - previousPoint).normalized;
-                        if(dir != Vector3.zero )
-                            Handles.ConeHandleCap(i, currentPoint - capSize * 0.5f * dir, Quaternion.LookRotation(dir), capSize, EventType.Repaint);
-                    }
+                    Handles.color = CurveDebugWindow.Settings.ArrowColor;
+                    Vector3 dir = (currentPoint - previousPoint).normalized;
+                    if(dir != Vector3.zero )
+                        Handles.ConeHandleCap(i, currentPoint - capSize * 0.5f * dir, Quaternion.LookRotation(dir), capSize, EventType.Repaint);
                 }
 
                 previousPoint = currentPoint;
+
+                Handles.color = CurveDebugWindow.Settings.PointColor;
+                Handles.SphereHandleCap(
+                    0,
+                    currentPoint,
+                    Quaternion.identity,
+                    CurveDebugWindow.Settings.PointSize,
+                    EventType.Repaint
+                );
 
                 if (!curve.ShowHandles) continue;
                 EditorGUI.BeginChangeCheck();

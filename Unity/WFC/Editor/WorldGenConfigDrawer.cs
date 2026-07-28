@@ -127,7 +127,6 @@ namespace steph.Unity.WFC.Editor
             DrawField("drawNames");
             DrawField("allowHollowTiles");
             DrawField("SocketColors", true);
-            DrawField("_behaviors", true);
             DrawBehaviors();
 
             if (isGridValid)

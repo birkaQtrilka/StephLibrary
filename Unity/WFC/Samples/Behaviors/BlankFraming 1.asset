@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e425f1a9934dbd4b978e22686ef91d2, type: 3}
   m_Name: BlankFraming 1
   m_EditorClassIdentifier: steph.Unity.WFC.Runtime::steph.Unity.WFC.Runtime.WFC_Framing
-  frameTileName: r
-  rotationCount: 1
+  frameTileName: daaa
+  rotationCount: 2

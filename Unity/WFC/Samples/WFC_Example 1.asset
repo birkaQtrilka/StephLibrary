@@ -1886,7 +1886,7 @@ MonoBehaviour:
   _apply: 0
   _behaviors:
   - {fileID: 11400000, guid: 8ace9206a68bd174ba4f7f552d6d8d55, type: 2}
-  - {fileID: 11400000, guid: 8ace9206a68bd174ba4f7f552d6d8d55, type: 2}
+  - {fileID: 11400000, guid: 2b3a8bff6ddb2f24099592279f0ef7cf, type: 2}
   drawGrid: 1
   drawSockets: 1
   allowHollowTiles: 0

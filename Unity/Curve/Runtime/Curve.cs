@@ -47,10 +47,27 @@ namespace steph.Unity.Curve.Runtime
                 pos1 = points[i].position;
                 pos2 = points[i + 1].position;
                 float segLength = (pos2 - pos1).magnitude;
+                
                 if (segLength > distance) return Vector3.Lerp(pos1, pos2, distance / segLength);
                 distance -= segLength;
             }
             return points[^1].position;
+        }
+
+        public Vector3 GetBezierPoint(Vector3 p0, Vector3 p1, Vector3 tangent, float t)
+        {
+            t = Mathf.Clamp01(t);
+            float u = 1f - t;
+
+            return (u * u * p0) + (2f * u * t * tangent) + (t * t * p1);
+        }
+
+        public Vector3 GetPoint(int i1, int i2, float t)
+        {
+            Vector3 p0 = points[i1].position;
+            Vector3 p1 = points[i2].position;
+            Vector3 tangent = points[i2].bezierTangent;
+            return GetBezierPoint(p0, p1, tangent, t);
         }
 
         public float Getlength()

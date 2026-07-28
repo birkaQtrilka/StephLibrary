@@ -4,6 +4,7 @@ namespace steph.Unity.Curve.Editor
     using steph.Unity.Curve.Runtime;
     using UnityEditor;
     using UnityEngine;
+    using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
 
     [CustomEditor(typeof(Curve))]
     public class CurveEditor : Editor
@@ -149,8 +150,14 @@ namespace steph.Unity.Curve.Editor
                 
                 if (i > 0)
                 {
+                    Vector3 currentTangent = handleTransform.TransformPoint(curve.points[i].bezierTangent);
+                    if(curve.ShowHandles)
+                        dirty |= DoBezier(handleTransform, currentPoint, previousPoint, i, ref currentTangent);
+
                     Handles.color = Color.white;
-                    Handles.DrawLine(previousPoint, currentPoint);
+                    Vector3 p1 = Vector3.Lerp(previousPoint, currentTangent, 0.6666667f);
+                    Vector3 p2 = Vector3.Lerp(currentPoint, currentTangent, 0.6666667f);
+                    Handles.DrawBezier(previousPoint, currentPoint, p1, p2, Color.wheat, null, 1);
                     
                     Camera cam = sceneView.camera;
                     float distance = Vector3.Distance(cam.transform.position, currentPoint);
@@ -158,11 +165,10 @@ namespace steph.Unity.Curve.Editor
                     float capSize = distance * screenSizeFactor;
 
                     Handles.color = CurveDebugWindow.Settings.ArrowColor;
-                    Vector3 dir = (currentPoint - previousPoint).normalized;
+                    Vector3 dir = (currentPoint - handleTransform.TransformPoint(curve.GetPoint(i - 1, i, 0.9f))).normalized;
                     if(dir != Vector3.zero )
                         Handles.ConeHandleCap(i, currentPoint - capSize * 0.5f * dir, Quaternion.LookRotation(dir), capSize, EventType.Repaint);
                 }
-
 
                 Handles.color = CurveDebugWindow.Settings.PointColor;
                 Handles.SphereHandleCap(
@@ -186,7 +192,7 @@ namespace steph.Unity.Curve.Editor
                     CurvePoint newPoint = new()
                     {
                         position = handleTransform.InverseTransformPoint(currentPoint),
-                        bezierTangent = Vector3.zero
+                        bezierTangent = curve.points[i].bezierTangent
                     };
                     curve.points[i] = newPoint;
                     EditorUtility.SetDirty(curve);
@@ -199,38 +205,42 @@ namespace steph.Unity.Curve.Editor
                     previousPoint = currentPoint;
                     continue;
                 }
-                Vector3 currentTangent = handleTransform.TransformPoint(curve.points[i].bezierTangent);
-                Handles.color = Color.yellow;
-
-                Handles.SphereHandleCap(
-                    0,
-                    currentTangent,
-                    Quaternion.identity,
-                    CurveDebugWindow.Settings.PointSize*.5f,
-                    EventType.Repaint
-                );
-                EditorGUI.BeginChangeCheck();
-
-                currentTangent = CustomHandle(currentTangent, .5f);
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Undo.RecordObject(curve, "moved tangent");
-                    CurvePoint newPoint = new()
-                    {
-                        position = handleTransform.InverseTransformPoint(currentPoint),
-                        bezierTangent = handleTransform.InverseTransformPoint(currentTangent)
-                    };
-                    curve.points[i] = newPoint;
-                    EditorUtility.SetDirty(curve);
-                    dirty = true;
-                }
-                Handles.DrawDottedLine(previousPoint, currentTangent, 3f);
-                Handles.DrawDottedLine(currentPoint, currentTangent , 3f);
                 previousPoint = currentPoint;
 
             }
             return dirty;
+        }
+        // Draws the bezier handles for a given point and checks if they are moved.
+        bool DoBezier(Transform handleTransform, Vector3 currentPoint, Vector3 previousPoint, int i, ref Vector3 currentTangent)
+        {
+            Handles.color = Color.yellow;
+
+            Handles.SphereHandleCap(
+                0,
+                currentTangent,
+                Quaternion.identity,
+                CurveDebugWindow.Settings.PointSize * .5f,
+                EventType.Repaint
+            );
+            EditorGUI.BeginChangeCheck();
+
+            currentTangent = CustomHandle(currentTangent, .5f);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(curve, "moved tangent");
+                CurvePoint newPoint = new()
+                {
+                    position = handleTransform.InverseTransformPoint(currentPoint),
+                    bezierTangent = handleTransform.InverseTransformPoint(currentTangent)
+                };
+                curve.points[i] = newPoint;
+                EditorUtility.SetDirty(curve);
+                return true;
+            }
+            Handles.DrawDottedLine(previousPoint, currentTangent, 3f);
+            Handles.DrawDottedLine(currentPoint, currentTangent, 3f);
+            return false;
         }
 
         Vector3 CustomHandle(Vector3 position, float scale, float planeSize = .25f, float planeOffset = .25f)

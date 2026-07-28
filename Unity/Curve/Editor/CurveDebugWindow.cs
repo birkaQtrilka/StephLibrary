@@ -43,6 +43,7 @@ namespace steph.Unity.Curve.Editor
             if (EditorGUI.EndChangeCheck())
             {
                 SceneView.RepaintAll();
+                
             }
         }
     }

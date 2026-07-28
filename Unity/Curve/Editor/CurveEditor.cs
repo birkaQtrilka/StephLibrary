@@ -1,11 +1,9 @@
 
 namespace steph.Unity.Curve.Editor
 {
-    using Codice.Client.Common;
     using steph.Unity.Curve.Runtime;
     using UnityEditor;
     using UnityEngine;
-    using static UnityEditor.PlayerSettings;
 
     [CustomEditor(typeof(Curve))]
     public class CurveEditor : Editor
@@ -62,7 +60,14 @@ namespace steph.Unity.Curve.Editor
             if (curve.AddOnMouse && Physics.Raycast(ray, out RaycastHit hit))
             {
                 Undo.RecordObject(curve, "Add Spline Point");
-                curve.points.Add(handleTransform.InverseTransformPoint(hit.point));
+
+                CurvePoint newPoint = new CurvePoint()
+                {
+                    position = handleTransform.InverseTransformPoint(hit.point),
+                    bezierTangent = Vector3.zero
+                };
+
+                curve.points.Add(newPoint);
                 EditorUtility.SetDirty(curve);
                 return true;
             }
@@ -86,21 +91,25 @@ namespace steph.Unity.Curve.Editor
             }
             else if (_lastModifiedPointIndex == curve.points.Count - 1)
             {
-                Vector3 neighbour = curve.points[_lastModifiedPointIndex - 1];
-                Vector3 lastModified = curve.points[_lastModifiedPointIndex];
+                Vector3 neighbour = curve.points[_lastModifiedPointIndex - 1].position;
+                Vector3 lastModified = curve.points[_lastModifiedPointIndex].position;
                 direction = lastModified - neighbour;
                 //direction = direction.normalized;
                 direction += lastModified;
             }
             else
             {
-                Vector3 neighbour = curve.points[_lastModifiedPointIndex + 1];
-                direction = Vector3.Lerp(neighbour, curve.points[_lastModifiedPointIndex], .4f);
+                Vector3 neighbour = curve.points[_lastModifiedPointIndex + 1].position;
+                direction = Vector3.Lerp(neighbour, curve.points[_lastModifiedPointIndex].position, .4f);
 
             }
 
             _lastModifiedPointIndex++;
-            curve.points.Insert(_lastModifiedPointIndex, direction);
+            curve.points.Insert(_lastModifiedPointIndex, new CurvePoint()
+            {
+                position = direction,
+                bezierTangent = direction
+            });
         }
 
         bool RemovePoint()
@@ -129,15 +138,15 @@ namespace steph.Unity.Curve.Editor
         {
             bool dirty = false;
             Transform handleTransform = curve.transform;
-
+            SceneView sceneView = SceneView.currentDrawingSceneView;
             Vector3 previousPoint = Vector3.zero;
+
+            if (sceneView == null) return dirty;
+
             for (int i = 0; i < curve.points.Count; i++)
             {
-                Vector3 currentPoint = handleTransform.TransformPoint(curve.points[i]);
-                SceneView sceneView = SceneView.currentDrawingSceneView;
-                if (sceneView == null) continue;
+                Vector3 currentPoint = handleTransform.TransformPoint(curve.points[i].position);
                 
-
                 if (i > 0)
                 {
                     Handles.color = Color.white;
@@ -154,7 +163,6 @@ namespace steph.Unity.Curve.Editor
                         Handles.ConeHandleCap(i, currentPoint - capSize * 0.5f * dir, Quaternion.LookRotation(dir), capSize, EventType.Repaint);
                 }
 
-                previousPoint = currentPoint;
 
                 Handles.color = CurveDebugWindow.Settings.PointColor;
                 Handles.SphereHandleCap(
@@ -165,20 +173,104 @@ namespace steph.Unity.Curve.Editor
                     EventType.Repaint
                 );
 
-                if (!curve.ShowHandles) continue;
+                if (!curve.ShowHandles)
+                {
+                    previousPoint = currentPoint;
+                    continue;
+                }
                 EditorGUI.BeginChangeCheck();
-                currentPoint = Handles.DoPositionHandle(currentPoint, Quaternion.identity);
+                currentPoint = CustomHandle(currentPoint, .5f);
                 if (EditorGUI.EndChangeCheck())
                 {
                     Undo.RecordObject(curve, "moved");
-                    curve.points[i] = handleTransform.InverseTransformPoint(currentPoint);
+                    CurvePoint newPoint = new()
+                    {
+                        position = handleTransform.InverseTransformPoint(currentPoint),
+                        bezierTangent = Vector3.zero
+                    };
+                    curve.points[i] = newPoint;
                     EditorUtility.SetDirty(curve);
                     _lastModifiedPointIndex = i;
                     dirty = true;
                 }
 
+                if(i == 0) 
+                { 
+                    previousPoint = currentPoint;
+                    continue;
+                }
+                Vector3 currentTangent = handleTransform.TransformPoint(curve.points[i].bezierTangent);
+                Handles.color = Color.yellow;
+
+                Handles.SphereHandleCap(
+                    0,
+                    currentTangent,
+                    Quaternion.identity,
+                    CurveDebugWindow.Settings.PointSize*.5f,
+                    EventType.Repaint
+                );
+                EditorGUI.BeginChangeCheck();
+
+                currentTangent = CustomHandle(currentTangent, .5f);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    Undo.RecordObject(curve, "moved tangent");
+                    CurvePoint newPoint = new()
+                    {
+                        position = handleTransform.InverseTransformPoint(currentPoint),
+                        bezierTangent = handleTransform.InverseTransformPoint(currentTangent)
+                    };
+                    curve.points[i] = newPoint;
+                    EditorUtility.SetDirty(curve);
+                    dirty = true;
+                }
+                Handles.DrawDottedLine(previousPoint, currentTangent, 3f);
+                Handles.DrawDottedLine(currentPoint, currentTangent , 3f);
+                previousPoint = currentPoint;
+
             }
             return dirty;
+        }
+
+        Vector3 CustomHandle(Vector3 position, float scale, float planeSize = .25f, float planeOffset = .25f)
+        {
+            float size = HandleUtility.GetHandleSize(position) * scale;
+            planeOffset *= size;
+            planeSize *= size;
+
+            Color originalColor = Handles.color;
+
+            // YZ Plane (Normal is X) - Red Square
+            Handles.color = new Color(Handles.xAxisColor.r, Handles.xAxisColor.g, Handles.xAxisColor.b, 0.4f); // Transparent
+            Vector3 offsetYZ = (Vector3.up + Vector3.forward) * planeOffset;
+            Vector3 newYZ = Handles.Slider2D(position + offsetYZ, Vector3.right, Vector3.up, Vector3.forward, planeSize, Handles.RectangleHandleCap, Vector2.zero);
+            position = newYZ - offsetYZ;
+
+            // XZ Plane (Normal is Y) - Green Square
+            Handles.color = new Color(Handles.yAxisColor.r, Handles.yAxisColor.g, Handles.yAxisColor.b, 0.4f);
+            Vector3 offsetXZ = (Vector3.right + Vector3.forward) * planeOffset;
+            Vector3 newXZ = Handles.Slider2D(position + offsetXZ, Vector3.up, Vector3.right, Vector3.forward, planeSize, Handles.RectangleHandleCap, Vector2.zero);
+            position = newXZ - offsetXZ;
+
+            // XY Plane (Normal is Z) - Blue Square
+            Handles.color = new Color(Handles.zAxisColor.r, Handles.zAxisColor.g, Handles.zAxisColor.b, 0.4f);
+            Vector3 offsetXY = (Vector3.right + Vector3.up) * planeOffset;
+            Vector3 newXY = Handles.Slider2D(position + offsetXY, Vector3.forward, Vector3.right, Vector3.up, planeSize, Handles.RectangleHandleCap, Vector2.zero);
+            position = newXY - offsetXY;
+
+
+            Handles.color = Handles.xAxisColor;
+            position = Handles.Slider(position, Vector3.right, size, Handles.ArrowHandleCap, 0f);
+
+            Handles.color = Handles.yAxisColor;
+            position = Handles.Slider(position, Vector3.up, size, Handles.ArrowHandleCap, 0f);
+
+            Handles.color = Handles.zAxisColor;
+            position = Handles.Slider(position, Vector3.forward, size, Handles.ArrowHandleCap, 0f);
+
+            Handles.color = originalColor;
+            return position;
         }
     }
 }

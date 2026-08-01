@@ -190,7 +190,7 @@ namespace steph.Unity.Curve.Editor
                     Handles.color = Color.white;
                     Vector3 p1 = Vector3.Lerp(previousPoint, currentTangent, 0.6666667f);
                     Vector3 p2 = Vector3.Lerp(currentPoint, currentTangent, 0.6666667f);
-                    Handles.DrawBezier(previousPoint, currentPoint, p1, p2, Color.wheat, null, 1);
+                    Handles.DrawBezier(previousPoint, currentPoint, p1, p2, Color.white, null, 1);
                     
                     Camera cam = sceneView.camera;
                     float distance = Vector3.Distance(cam.transform.position, currentPoint);

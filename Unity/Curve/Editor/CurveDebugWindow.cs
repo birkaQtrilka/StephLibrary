@@ -15,8 +15,8 @@ namespace steph.Unity.Curve.Editor
     {
         public static CurveDebugSettings Settings { get; private set; } = new CurveDebugSettings
         {
-            PointColor = Color.blanchedAlmond,
-            ArrowColor = Color.aliceBlue,
+            PointColor = Color.white,
+            ArrowColor = Color.blue,
             PointSize = .1f,
             ArrowSize = 1f,
         };

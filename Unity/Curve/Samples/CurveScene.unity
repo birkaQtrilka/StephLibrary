@@ -376,7 +376,7 @@ MonoBehaviour:
     bezierTangent: {x: 0.6791055, y: -0.03635542, z: 0.7624259}
   - position: {x: 0.7524878, y: -0.16512904, z: 1.6239266}
     bezierTangent: {x: 0.7583302, y: -0.10828151, z: 1.2995975}
-  - position: {x: 0.06658608, y: -0.39425004, z: 1.6595464}
+  - position: {x: 0.06658608, y: -0.14768356, z: 1.6595464}
     bezierTangent: {x: 0.40953693, y: -0.27968955, z: 1.6417365}
   - position: {x: -0.4887038, y: 0, z: 2.831006}
     bezierTangent: {x: -0.21105886, y: -0.19712502, z: 2.2452762}
@@ -393,7 +393,7 @@ MonoBehaviour:
   - position: {x: 2.3887308, y: 0, z: 2.298872}
     bezierTangent: {x: 2.2891757, y: 0, z: 2.19979}
   AddOnMouse: 0
-  ShowHandles: 0
+  ShowHandles: 1
   LockTangents: 0
 --- !u!4 &539242999
 Transform:

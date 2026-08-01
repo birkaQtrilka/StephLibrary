@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "displayName": "Stefan's Utils",
     "description": "Shared utilities across my Unity projects.",
-    "unity": "6000",
+    "unity": "6000.0",
     "author": {
         "name": "Stefan Carpeliuc"
     }

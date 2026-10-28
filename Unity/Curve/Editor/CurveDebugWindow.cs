@@ -6,6 +6,7 @@ namespace steph.Unity.Curve.Editor
     public class CurveDebugSettings
     {
         public Color PointColor;
+        public Color BezierColor;
         public float PointSize;
         public float ArrowSize;
         public Color ArrowColor;
@@ -17,6 +18,7 @@ namespace steph.Unity.Curve.Editor
         {
             PointColor = Color.white,
             ArrowColor = Color.blue,
+            BezierColor = Color.white,
             PointSize = .1f,
             ArrowSize = 1f,
         };
@@ -39,6 +41,8 @@ namespace steph.Unity.Curve.Editor
 
             Settings.ArrowColor = EditorGUILayout.ColorField("Arrow Color", Settings.ArrowColor);
             Settings.ArrowSize = EditorGUILayout.Slider("Arrow Size", Settings.ArrowSize, 0.001f, 10);
+
+            Settings.BezierColor = EditorGUILayout.ColorField("Bezier Color", Settings.BezierColor);
 
             if (EditorGUI.EndChangeCheck())
             {

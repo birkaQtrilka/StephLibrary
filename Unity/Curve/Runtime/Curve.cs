@@ -83,5 +83,6 @@ namespace steph.Unity.Curve.Runtime
             }
             return res;
         }
+
     }
 }
